@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -64,55 +65,65 @@ export default function Hero() {
 
           {/* Device mockups */}
           <div className="relative flex justify-center items-center h-96 lg:h-[500px]">
-            {/* Desktop frame */}
+            {/* Desktop frame — Forza Karate Club */}
             <div className="absolute w-72 lg:w-80 bg-white rounded-2xl shadow-2xl border-4 border-gray-200 overflow-hidden animate-float top-0 left-0 lg:left-8">
               <div className="bg-gray-100 h-7 flex items-center gap-1.5 px-3">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
                 <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
               </div>
-              <div className="h-44 bg-gradient-to-br from-indigo-500 to-purple-600 flex flex-col items-center justify-center text-white p-4">
-                <div className="text-xs font-bold mb-1">🏠 Collins Electrical</div>
-                <div className="text-[10px] text-indigo-200 text-center">Your trusted local electrician</div>
-                <div className="mt-3 bg-white text-indigo-600 text-[9px] font-bold px-3 py-1 rounded-full">Get a Quote →</div>
+              <div className="h-44 relative overflow-hidden">
+                <Image
+                  src="/forza.png"
+                  alt="Forza Karate Club website"
+                  fill
+                  className="object-cover object-top"
+                  sizes="320px"
+                />
               </div>
-              <div className="p-3 space-y-2">
-                <div className="h-2 bg-gray-200 rounded w-3/4" />
-                <div className="h-2 bg-gray-100 rounded w-1/2" />
-                <div className="h-2 bg-gray-100 rounded w-2/3" />
+              <div className="px-3 py-2">
+                <div className="text-[10px] font-bold text-gray-700">Forza Karate Club</div>
+                <div className="text-[9px] text-gray-400">forzakarate.co.uk</div>
               </div>
             </div>
 
-            {/* Mobile frame */}
+            {/* Mobile frame — JHKA */}
             <div className="absolute w-28 bg-white rounded-2xl shadow-2xl border-4 border-gray-200 overflow-hidden right-0 lg:right-8 bottom-8" style={{ animationDelay: "1.5s" }}>
               <div className="bg-gray-100 h-5 flex items-center justify-center">
                 <div className="w-8 h-1.5 bg-gray-300 rounded-full" />
               </div>
-              <div className="h-44 bg-gradient-to-br from-pink-400 to-rose-500 flex flex-col items-center justify-center text-white p-2">
-                <div className="text-[10px] font-bold mb-1">💅 Glow Studio</div>
-                <div className="text-[8px] text-pink-100 text-center">Beauty Salon</div>
-                <div className="mt-2 bg-white text-pink-600 text-[8px] font-bold px-2 py-0.5 rounded-full">Book Now</div>
+              <div className="h-44 relative overflow-hidden">
+                <Image
+                  src="/jhka.png"
+                  alt="JHKA website"
+                  fill
+                  className="object-cover object-top"
+                  sizes="112px"
+                />
               </div>
-              <div className="p-2 space-y-1.5">
-                <div className="h-1.5 bg-gray-200 rounded w-3/4" />
-                <div className="h-1.5 bg-gray-100 rounded w-1/2" />
+              <div className="px-2 py-1.5">
+                <div className="text-[9px] font-bold text-gray-700">JHKA</div>
+                <div className="text-[8px] text-gray-400">jhka.co.uk</div>
               </div>
             </div>
 
-            {/* Tablet frame */}
+            {/* Tablet frame — JGFA */}
             <div className="absolute w-48 bg-white rounded-2xl shadow-xl border-4 border-gray-200 overflow-hidden left-1/2 -translate-x-1/2 bottom-0" style={{ animationDelay: "0.75s" }}>
               <div className="bg-gray-100 h-6 flex items-center gap-1.5 px-3">
                 <div className="w-2 h-2 rounded-full bg-gray-300" />
               </div>
-              <div className="h-32 bg-gradient-to-br from-emerald-400 to-teal-500 flex flex-col items-center justify-center text-white p-3">
-                <div className="text-xs font-bold mb-1">🥋 Dragon Karate</div>
-                <div className="text-[10px] text-emerald-100">Enrol Today — Free Trial Class</div>
-                <div className="mt-2 bg-white text-emerald-600 text-[9px] font-bold px-3 py-0.5 rounded-full">Apply Now</div>
+              <div className="h-32 relative overflow-hidden">
+                <Image
+                  src="/jgfa.png"
+                  alt="JGFA website"
+                  fill
+                  className="object-cover object-top"
+                  sizes="192px"
+                />
               </div>
-              <div className="p-2 space-y-1.5">
-                <div className="h-1.5 bg-gray-200 rounded w-3/4" />
-                <div className="h-1.5 bg-gray-100 rounded w-1/2" />
-                <div className="h-1.5 bg-gray-100 rounded w-2/3" />
+              <div className="px-2 py-1.5">
+                <div className="text-[9px] font-bold text-gray-700">JGFA Football</div>
+                <div className="text-[9px] text-gray-400">jgfa.co.uk</div>
               </div>
             </div>
           </div>
