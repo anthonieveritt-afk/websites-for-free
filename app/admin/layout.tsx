@@ -26,7 +26,11 @@ async function syncUser() {
         .select("*", { count: "exact", head: true })
         .eq("role", "admin");
       const role = (count ?? 0) === 0 ? "admin" : "client";
-      await supabase.from("platform_users").insert({ clerk_id: userId, email: "", role });
+      const { default: clerk } = await import("@clerk/nextjs/server");
+      const user = await clerk.currentUser();
+      const email = user?.emailAddresses?.[0]?.emailAddress ?? "";
+      const fullName = [user?.firstName, user?.lastName].filter(Boolean).join(" ") || null;
+      await supabase.from("platform_users").insert({ clerk_id: userId, email, full_name: fullName, role });
     }
   } catch {}
 }
