@@ -1,0 +1,123 @@
+import Link from "next/link";
+
+export default function Hero() {
+  return (
+    <section className="relative pt-24 pb-20 lg:pt-32 lg:pb-28 overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 hero-gradient" />
+      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-purple-200/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Text */}
+          <div className="animate-fade-in-up">
+            <div className="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 rounded-full px-4 py-1.5 text-sm font-semibold text-indigo-700 mb-6">
+              ✨ No upfront cost. No contracts. No risk.
+            </div>
+
+            <h1 className="text-5xl lg:text-6xl font-black text-gray-900 leading-tight mb-6">
+              Get A Professional
+              <span className="text-indigo-500 block">Website Built</span>
+              <span className="block">For Free</span>
+            </h1>
+
+            <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
+              We build your website first. If you love it, simply continue with
+              affordable monthly hosting. No design fees. No hidden costs. No
+              long-term contracts.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <Link
+                href="/apply"
+                className="inline-flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold px-8 py-4 rounded-full text-lg transition-all duration-200 shadow-xl hover:shadow-2xl hover:-translate-y-1"
+              >
+                🚀 Start My Free Website
+              </Link>
+              <Link
+                href="/portfolio"
+                className="inline-flex items-center gap-2 border-2 border-gray-200 hover:border-indigo-300 text-gray-700 hover:text-indigo-600 font-semibold px-8 py-4 rounded-full text-lg transition-all duration-200"
+              >
+                See Example Websites →
+              </Link>
+            </div>
+
+            {/* Social proof stats */}
+            <div className="flex flex-wrap gap-6 mt-10">
+              <div>
+                <div className="text-2xl font-black text-gray-900">200+</div>
+                <div className="text-sm text-gray-500">Websites built</div>
+              </div>
+              <div className="w-px bg-gray-200" />
+              <div>
+                <div className="text-2xl font-black text-gray-900">★ 4.9</div>
+                <div className="text-sm text-gray-500">Average rating</div>
+              </div>
+              <div className="w-px bg-gray-200" />
+              <div>
+                <div className="text-2xl font-black text-gray-900">10 days</div>
+                <div className="text-sm text-gray-500">Free trial</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Device mockups */}
+          <div className="relative flex justify-center items-center h-96 lg:h-[500px]">
+            {/* Desktop frame */}
+            <div className="absolute w-72 lg:w-80 bg-white rounded-2xl shadow-2xl border-4 border-gray-200 overflow-hidden animate-float top-0 left-0 lg:left-8">
+              <div className="bg-gray-100 h-7 flex items-center gap-1.5 px-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+              </div>
+              <div className="h-44 bg-gradient-to-br from-indigo-500 to-purple-600 flex flex-col items-center justify-center text-white p-4">
+                <div className="text-xs font-bold mb-1">🏠 Collins Electrical</div>
+                <div className="text-[10px] text-indigo-200 text-center">Your trusted local electrician</div>
+                <div className="mt-3 bg-white text-indigo-600 text-[9px] font-bold px-3 py-1 rounded-full">Get a Quote →</div>
+              </div>
+              <div className="p-3 space-y-2">
+                <div className="h-2 bg-gray-200 rounded w-3/4" />
+                <div className="h-2 bg-gray-100 rounded w-1/2" />
+                <div className="h-2 bg-gray-100 rounded w-2/3" />
+              </div>
+            </div>
+
+            {/* Mobile frame */}
+            <div className="absolute w-28 bg-white rounded-2xl shadow-2xl border-4 border-gray-200 overflow-hidden right-0 lg:right-8 bottom-8" style={{ animationDelay: "1.5s" }}>
+              <div className="bg-gray-100 h-5 flex items-center justify-center">
+                <div className="w-8 h-1.5 bg-gray-300 rounded-full" />
+              </div>
+              <div className="h-44 bg-gradient-to-br from-pink-400 to-rose-500 flex flex-col items-center justify-center text-white p-2">
+                <div className="text-[10px] font-bold mb-1">💅 Glow Studio</div>
+                <div className="text-[8px] text-pink-100 text-center">Beauty Salon</div>
+                <div className="mt-2 bg-white text-pink-600 text-[8px] font-bold px-2 py-0.5 rounded-full">Book Now</div>
+              </div>
+              <div className="p-2 space-y-1.5">
+                <div className="h-1.5 bg-gray-200 rounded w-3/4" />
+                <div className="h-1.5 bg-gray-100 rounded w-1/2" />
+              </div>
+            </div>
+
+            {/* Tablet frame */}
+            <div className="absolute w-48 bg-white rounded-2xl shadow-xl border-4 border-gray-200 overflow-hidden left-1/2 -translate-x-1/2 bottom-0" style={{ animationDelay: "0.75s" }}>
+              <div className="bg-gray-100 h-6 flex items-center gap-1.5 px-3">
+                <div className="w-2 h-2 rounded-full bg-gray-300" />
+              </div>
+              <div className="h-32 bg-gradient-to-br from-emerald-400 to-teal-500 flex flex-col items-center justify-center text-white p-3">
+                <div className="text-xs font-bold mb-1">🥋 Dragon Karate</div>
+                <div className="text-[10px] text-emerald-100">Enrol Today — Free Trial Class</div>
+                <div className="mt-2 bg-white text-emerald-600 text-[9px] font-bold px-3 py-0.5 rounded-full">Apply Now</div>
+              </div>
+              <div className="p-2 space-y-1.5">
+                <div className="h-1.5 bg-gray-200 rounded w-3/4" />
+                <div className="h-1.5 bg-gray-100 rounded w-1/2" />
+                <div className="h-1.5 bg-gray-100 rounded w-2/3" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
