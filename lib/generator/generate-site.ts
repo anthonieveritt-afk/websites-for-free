@@ -75,6 +75,11 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
   const services = (app.features_wanted as string[]) ?? [];
   const goals = (app.goals as string[]) ?? [];
 
+  // Pull uploaded images
+  const logoUrl = (app as Application & { logo_url?: string }).logo_url ?? null;
+  const heroImageUrl = (app as Application & { heroUrl?: string }).heroUrl ?? null;
+  const galleryImageUrls: string[] = (app as Application & { galleryUrls?: string[] }).galleryUrls ?? [];
+
   // ─── index.html ────────────────────────────────────────────────────────────
   const indexHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -96,7 +101,7 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
     .nav-links a:hover { color: var(--accent); }
     .nav-cta { background: var(--accent); color: #fff !important; padding: 0.5rem 1.25rem; border-radius: 999px; font-weight: 600 !important; font-size: 0.875rem !important; }
     /* HERO */
-    .hero { background: linear-gradient(135deg, var(--accent)22, var(--accent)08); padding: 5rem 1.5rem; text-align: center; }
+    .hero { ${heroImageUrl ? `background: linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url('${heroImageUrl}') center/cover no-repeat; padding: 5rem 1.5rem; text-align: center;` : `background: linear-gradient(135deg, var(--accent)22, var(--accent)08); padding: 5rem 1.5rem; text-align: center;`} }
     .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--dark); margin-bottom: 1rem; }
     .hero h1 span { color: var(--accent); }
     .hero p { font-size: 1.125rem; color: #6b7280; max-width: 560px; margin: 0 auto 2rem; }
@@ -133,7 +138,7 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">${app.business_name}</div>
+    <div class="nav-logo">${logoUrl ? `<img src="${logoUrl}" alt="${app.business_name} logo" style="height:36px;object-fit:contain;"/>` : app.business_name}</div>
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#about">About</a>
@@ -145,8 +150,8 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <h1>${app.business_name}<br/><span>${copy.tagline}</span></h1>
-      <p>${app.ideal_customers ? `Serving ${app.ideal_customers}` : copy.heroSub}</p>
+      <h1 style="${heroImageUrl ? 'color:#fff;' : ''}">${app.business_name}<br/><span style="${heroImageUrl ? 'color:#fff;opacity:0.85;' : ''}">${copy.tagline}</span></h1>
+      <p style="${heroImageUrl ? 'color:rgba(255,255,255,0.85);' : ''}">${app.ideal_customers ? `Serving ${app.ideal_customers}` : copy.heroSub}</p>
       <a href="#contact" class="btn">Contact Us Today</a>
       <a href="#services" class="btn btn-ghost">Our Services</a>
     </div>
@@ -199,7 +204,17 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
     </div>
   </section>
 
-  <!-- CONTACT -->
+  ${galleryImageUrls.length > 0 ? `
+  <section style="background:#f9fafb;padding:4rem 1.5rem;">
+    <div class="container">
+      <h2 class="section-title">Gallery</h2>
+      <p class="section-sub">A look at our work.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+        ${galleryImageUrls.map(url => `<img src="${url}" alt="Gallery" style="width:100%;height:200px;object-fit:cover;border-radius:1rem;"/>`).join("")}
+      </div>
+    </div>
+  </section>` : ""}
+
   <section id="contact" class="contact">
     <div class="container">
       <h2 class="section-title">Get In Touch</h2>

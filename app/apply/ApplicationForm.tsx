@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import StepIndicator from "@/components/ui/StepIndicator";
 
-const STEPS = ["Your Business", "Your Goals", "Features", "Contact", "Confirm"];
+const STEPS = ["Your Business", "Your Goals", "Features", "Photos", "Contact", "Confirm"];
 
 const industries = [
   "Tradesman / General",
@@ -65,12 +65,16 @@ interface FormData {
   // Step 3
   features: string[];
   pageCount: string;
-  // Step 4
+  // Step 4 — Photos
+  logoUrl: string;
+  heroUrl: string;
+  galleryUrls: string[];
+  // Step 5
   fullName: string;
   email: string;
   phone: string;
   bestTime: string;
-  // Step 5
+  // Step 6
   budget: string;
   timeline: string;
   howFound: string;
@@ -86,6 +90,9 @@ const initialData: FormData = {
   competitorUrls: "",
   features: [],
   pageCount: "",
+  logoUrl: "",
+  heroUrl: "",
+  galleryUrls: [],
   fullName: "",
   email: "",
   phone: "",
@@ -99,6 +106,7 @@ export default function ApplicationForm() {
   const [step, setStep] = useState(1);
   const [form, setForm] = useState<FormData>(initialData);
   const [submitting, setSubmitting] = useState(false);
+  const [uploading, setUploading] = useState<string | null>(null);
   const router = useRouter();
 
   function update(key: keyof FormData, value: string) {
@@ -115,18 +123,44 @@ export default function ApplicationForm() {
     });
   }
 
+  async function uploadFile(file: File, field: "logoUrl" | "heroUrl" | "gallery"): Promise<string | null> {
+    setUploading(field);
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("folder", form.businessName ? form.businessName.toLowerCase().replace(/[^a-z0-9]/g, "-") : "uploads");
+    try {
+      const res = await fetch("/api/upload", { method: "POST", body: fd });
+      const json = await res.json();
+      setUploading(null);
+      return json.url ?? null;
+    } catch {
+      setUploading(null);
+      return null;
+    }
+  }
+
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>, field: "logoUrl" | "heroUrl" | "gallery") {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const url = await uploadFile(file, field);
+    if (!url) return;
+    if (field === "gallery") {
+      setForm((prev) => ({ ...prev, galleryUrls: [...prev.galleryUrls, url] }));
+    } else {
+      setForm((prev) => ({ ...prev, [field]: url }));
+    }
+    e.target.value = "";
+  }
+
   async function handleSubmit() {
     setSubmitting(true);
-    // POST to placeholder endpoint
     try {
       await fetch("/api/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-    } catch {
-      // Silently continue — placeholder endpoint
-    }
+    } catch {}
     router.push("/thank-you");
   }
 
@@ -347,8 +381,83 @@ export default function ApplicationForm() {
         </div>
       )}
 
-      {/* Step 4: Contact Details */}
+      {/* Step 4: Photos & Branding */}
       {step === 4 && (
+        <div className="space-y-5">
+          <div>
+            <h2 className="text-2xl font-black text-gray-900 mb-1">Photos &amp; Branding</h2>
+            <p className="text-gray-500 text-sm">Upload your logo and photos — we&apos;ll use these to build your website. All optional but recommended.</p>
+          </div>
+
+          {/* Logo */}
+          <div>
+            <label className={labelClass}>Your logo (PNG or SVG preferred)</label>
+            {form.logoUrl ? (
+              <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-200">
+                <img src={form.logoUrl} alt="Logo" className="h-12 w-12 object-contain rounded" />
+                <div className="flex-1">
+                  <p className="text-xs text-emerald-600 font-semibold">✅ Logo uploaded</p>
+                </div>
+                <button type="button" onClick={() => update("logoUrl", "")} className="text-xs text-red-400 hover:text-red-600">✕ Remove</button>
+              </div>
+            ) : (
+              <label className="flex items-center justify-center gap-2 w-full py-4 border-2 border-dashed border-gray-200 rounded-xl cursor-pointer hover:border-indigo-300 transition-all text-sm text-gray-500">
+                {uploading === "logoUrl" ? "🔄 Uploading..." : "📷 Click to upload logo"}
+                <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileChange(e, "logoUrl")} disabled={uploading !== null} />
+              </label>
+            )}
+          </div>
+
+          {/* Hero photo */}
+          <div>
+            <label className={labelClass}>Main / hero photo (shown at the top of your site)</label>
+            {form.heroUrl ? (
+              <div className="relative rounded-xl overflow-hidden border border-gray-200">
+                <img src={form.heroUrl} alt="Hero" className="w-full h-36 object-cover" />
+                <button type="button" onClick={() => update("heroUrl", "")} className="absolute top-2 right-2 bg-white/90 text-red-500 text-xs font-bold px-2 py-1 rounded-lg hover:bg-white">✕ Remove</button>
+                <p className="text-xs text-emerald-600 font-semibold p-2">✅ Hero photo uploaded</p>
+              </div>
+            ) : (
+              <label className="flex items-center justify-center gap-2 w-full py-8 border-2 border-dashed border-gray-200 rounded-xl cursor-pointer hover:border-indigo-300 transition-all text-sm text-gray-500">
+                {uploading === "heroUrl" ? "🔄 Uploading..." : "🌄 Click to upload main photo"}
+                <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileChange(e, "heroUrl")} disabled={uploading !== null} />
+              </label>
+            )}
+          </div>
+
+          {/* Gallery */}
+          <div>
+            <label className={labelClass}>Gallery photos (up to 6 — optional)</label>
+            <div className="grid grid-cols-3 gap-2 mb-2">
+              {form.galleryUrls.map((url, i) => (
+                <div key={url} className="relative rounded-xl overflow-hidden border border-gray-200">
+                  <img src={url} alt={`Gallery ${i + 1}`} className="w-full h-20 object-cover" />
+                  <button
+                    type="button"
+                    onClick={() => setForm((prev) => ({ ...prev, galleryUrls: prev.galleryUrls.filter((_, j) => j !== i) }))}
+                    className="absolute top-1 right-1 bg-white/90 text-red-500 text-[10px] font-bold px-1.5 py-0.5 rounded"
+                  >✕</button>
+                </div>
+              ))}
+              {form.galleryUrls.length < 6 && (
+                <label className="flex items-center justify-center h-20 border-2 border-dashed border-gray-200 rounded-xl cursor-pointer hover:border-indigo-300 transition-all text-2xl text-gray-300">
+                  {uploading === "gallery" ? "🔄" : "+"}
+                  <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileChange(e, "gallery")} disabled={uploading !== null || form.galleryUrls.length >= 6} />
+                </label>
+              )}
+            </div>
+            <p className="text-xs text-gray-400">{form.galleryUrls.length}/6 photos uploaded</p>
+          </div>
+
+          <div className="flex gap-3">
+            <button onClick={() => setStep(3)} className="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-3.5 rounded-full transition-all hover:border-gray-300 cursor-pointer">← Back</button>
+            <button onClick={() => setStep(5)} className="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3.5 rounded-full transition-all shadow-lg hover:-translate-y-0.5 cursor-pointer">Continue →</button>
+          </div>
+        </div>
+      )}
+
+      {/* Step 5: Contact Details */}
+      {step === 5 && (
         <div className="space-y-5">
           <div>
             <h2 className="text-2xl font-black text-gray-900 mb-1">Your Contact Details</h2>
@@ -413,13 +522,13 @@ export default function ApplicationForm() {
 
           <div className="flex gap-3">
             <button
-              onClick={() => setStep(3)}
+              onClick={() => setStep(4)}
               className="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-3.5 rounded-full transition-all hover:border-gray-300 cursor-pointer"
             >
               ← Back
             </button>
             <button
-              onClick={() => form.fullName && form.email && form.phone && setStep(5)}
+              onClick={() => form.fullName && form.email && form.phone && setStep(6)}
               className="flex-1 bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3.5 rounded-full transition-all shadow-lg hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
               disabled={!form.fullName || !form.email || !form.phone}
             >
@@ -429,8 +538,8 @@ export default function ApplicationForm() {
         </div>
       )}
 
-      {/* Step 5: Confirm */}
-      {step === 5 && (
+      {/* Step 6: Confirm */}
+      {step === 6 && (
         <div className="space-y-5">
           <div>
             <h2 className="text-2xl font-black text-gray-900 mb-1">Confirm & Submit</h2>
@@ -529,7 +638,7 @@ export default function ApplicationForm() {
 
           <div className="flex gap-3">
             <button
-              onClick={() => setStep(4)}
+              onClick={() => setStep(5)}
               className="flex-1 border-2 border-gray-200 text-gray-600 font-bold py-3.5 rounded-full transition-all hover:border-gray-300 cursor-pointer"
             >
               ← Back

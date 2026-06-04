@@ -79,6 +79,7 @@ export async function POST(req: NextRequest) {
     timeline,
     special_notes: specialNotes,
     social_links: socialLinks ?? {},
+    logo_url: body.logoUrl ?? null,
     ip_address: ip,
     status: "new_lead",
   }).select().single();
