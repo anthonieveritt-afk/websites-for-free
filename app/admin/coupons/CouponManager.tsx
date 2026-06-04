@@ -32,6 +32,7 @@ export default function CouponManager({ coupons }: { coupons: Coupon[] }) {
   const [form, setForm] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
   const [togglingId, setTogglingId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   function update(key: keyof typeof emptyForm, value: string) {
@@ -50,7 +51,8 @@ export default function CouponManager({ coupons }: { coupons: Coupon[] }) {
   async function submit() {
     if (!form.code || !form.discount_value) return;
     setSaving(true);
-    await fetch("/api/admin/coupons", {
+    setError(null);
+    const res = await fetch("/api/admin/coupons", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -60,6 +62,12 @@ export default function CouponManager({ coupons }: { coupons: Coupon[] }) {
         expiry_at: form.expiry_at || null,
       }),
     });
+    const json = await res.json();
+    if (!res.ok) {
+      setError(json.error ?? "Something went wrong");
+      setSaving(false);
+      return;
+    }
     setForm(emptyForm);
     setShowForm(false);
     setSaving(false);
@@ -149,6 +157,11 @@ export default function CouponManager({ coupons }: { coupons: Coupon[] }) {
             </div>
           </div>
 
+          {error && (
+            <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
+              ⚠️ {error}
+            </div>
+          )}
           <button onClick={submit} disabled={saving || !form.code || !form.discount_value}
             className="mt-5 bg-gray-900 hover:bg-gray-800 disabled:opacity-50 text-white font-bold text-sm px-6 py-2.5 rounded-full transition-all">
             {saving ? "Saving…" : "Create Coupon"}
