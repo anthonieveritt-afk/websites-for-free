@@ -8,6 +8,7 @@ const navItems = [
   { href: "/admin", label: "Applications", icon: "📋" },
   { href: "/admin/coupons", label: "Coupons", icon: "🎟️" },
   { href: "/admin/team", label: "Team", icon: "👥" },
+  { href: "/admin/profile", label: "Profile", icon: "👤" },
 ];
 
 async function syncUser() {
