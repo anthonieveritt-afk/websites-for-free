@@ -1,4 +1,4 @@
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, Show } from "@clerk/nextjs";
 import Link from "next/link";
 import { BRAND } from "@/lib/config/brand";
 
