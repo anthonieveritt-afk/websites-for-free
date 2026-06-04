@@ -81,10 +81,7 @@ export default function Hero() {
                   sizes="320px"
                 />
               </div>
-              <div className="px-3 py-2">
-                <div className="text-[10px] font-bold text-gray-700">Forza Karate Club</div>
-                <div className="text-[9px] text-gray-400">forzakarate.co.uk</div>
-              </div>
+
             </div>
 
             {/* Mobile frame — JHKA */}
@@ -101,10 +98,7 @@ export default function Hero() {
                   sizes="112px"
                 />
               </div>
-              <div className="px-2 py-1.5">
-                <div className="text-[9px] font-bold text-gray-700">JHKA</div>
-                <div className="text-[8px] text-gray-400">jhka.co.uk</div>
-              </div>
+
             </div>
 
             {/* Tablet frame — JGFA */}
@@ -121,10 +115,7 @@ export default function Hero() {
                   sizes="192px"
                 />
               </div>
-              <div className="px-2 py-1.5">
-                <div className="text-[9px] font-bold text-gray-700">JGFA Football</div>
-                <div className="text-[9px] text-gray-400">jgfa.co.uk</div>
-              </div>
+
             </div>
           </div>
         </div>
