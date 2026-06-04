@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | YourWebsiteNow",
-  description: "YourWebsiteNow privacy policy — how we collect, use, and protect your personal data in compliance with UK GDPR.",
+  title: "Privacy Policy | yourwebsitenow.co.uk",
+  description: "yourwebsitenow.co.uk privacy policy — how we collect, use, and protect your personal data in compliance with UK GDPR.",
 };
 
 export default function PrivacyPage() {
@@ -21,7 +21,7 @@ export default function PrivacyPage() {
             <div>
               <h2 className="text-xl font-black text-gray-900 mb-3">1. Who We Are</h2>
               <p>
-                YourWebsiteNow (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is registered in England and Wales. We operate 
+                yourwebsitenow.co.uk (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is registered in England and Wales. We operate 
                 the website at yourwebsitenow.co.uk and provide website design and hosting services. 
                 We are the data controller for personal information collected through our website and services.
               </p>

@@ -46,7 +46,7 @@ export default function CostCalculator() {
             </div>
           </div>
 
-          {/* YourWebsiteNow */}
+          {/* yourwebsitenow.co.uk */}
           <div className="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-indigo-50 p-8 relative overflow-hidden">
             <div className="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full">
               BEST VALUE
@@ -55,7 +55,7 @@ export default function CostCalculator() {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-xl">🎉</div>
               <div>
-                <div className="font-black text-gray-900 text-lg">YourWebsiteNow</div>
+                <div className="font-black text-gray-900 text-lg">yourwebsitenow.co.uk</div>
                 <div className="text-sm text-emerald-600 font-medium">Free to try, affordable to keep</div>
               </div>
             </div>

@@ -12,7 +12,7 @@ import { faqs } from "@/lib/faqs";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "YourWebsiteNow | Get A Professional Website Built For Free",
+  title: "yourwebsitenow.co.uk | Get A Professional Website Built For Free",
   description:
     "We build your professional website for free. Try it for 10 days — if you love it, continue for just £29/month. No upfront cost. No contracts.",
 };
@@ -107,7 +107,7 @@ export default function HomePage() {
             Ready To Get Your Business Online?
           </h2>
           <p className="text-xl text-indigo-200 mb-8">
-            Join hundreds of UK small businesses already using YourWebsiteNow
+            Join hundreds of UK small businesses already using yourwebsitenow.co.uk
           </p>
           <Link
             href="/apply"

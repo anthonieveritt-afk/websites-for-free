@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Us | YourWebsiteNow",
+  title: "About Us | yourwebsitenow.co.uk",
   description:
-    "Learn about YourWebsiteNow — our mission to help UK small businesses get online affordably, without the risk of upfront agency fees.",
+    "Learn about yourwebsitenow.co.uk — our mission to help UK small businesses get online affordably, without the risk of upfront agency fees.",
 };
 
 const values = [
@@ -51,10 +51,10 @@ export default function AboutPage() {
             Our story
           </div>
           <h1 className="text-5xl font-black text-gray-900 mb-6">
-            About YourWebsiteNow
+            About yourwebsitenow.co.uk
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            We started YourWebsiteNow with a simple belief: every UK small business deserves a 
+            We started yourwebsitenow.co.uk with a simple belief: every UK small business deserves a 
             professional website — regardless of budget. So we built a model that removes the biggest 
             barrier: the upfront cost.
           </p>

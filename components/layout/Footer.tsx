@@ -149,7 +149,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm">
-            © 2025 YourWebsiteNow. All rights reserved.
+            © 2025 yourwebsitenow.co.uk. All rights reserved.
           </p>
           <p className="text-sm">Registered in England & Wales</p>
         </div>

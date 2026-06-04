@@ -3,7 +3,7 @@ import Link from "next/link";
 import Badge from "@/components/ui/Badge";
 
 export const metadata: Metadata = {
-  title: "Pricing | YourWebsiteNow — From £29/month",
+  title: "Pricing | yourwebsitenow.co.uk — From £29/month",
   description:
     "Simple, affordable pricing with a free 10-day trial. Starter from £29/month. No setup fees, no hidden costs, cancel anytime.",
 };

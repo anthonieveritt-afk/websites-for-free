@@ -4,9 +4,9 @@ import FaqAccordion from "@/components/sections/FaqAccordion";
 import { faqs } from "@/lib/faqs";
 
 export const metadata: Metadata = {
-  title: "FAQ | YourWebsiteNow — Your Questions Answered",
+  title: "FAQ | yourwebsitenow.co.uk — Your Questions Answered",
   description:
-    "Got questions about YourWebsiteNow? Find answers to everything — from how it works to pricing, your website, and support.",
+    "Got questions about yourwebsitenow.co.uk? Find answers to everything — from how it works to pricing, your website, and support.",
 };
 
 export default function FaqPage() {
@@ -21,7 +21,7 @@ export default function FaqPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-xl text-gray-600">
-            Everything you need to know about YourWebsiteNow.
+            Everything you need to know about yourwebsitenow.co.uk.
           </p>
         </div>
       </section>

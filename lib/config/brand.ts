@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const BRAND = {
-  name: "YourWebsiteNow",
+  name: "yourwebsitenow.co.uk",
   tagline: "Get A Professional Website Built For Free",
   domain: "yourwebsitenow.co.uk",
   email: "hello@yourwebsitenow.co.uk",

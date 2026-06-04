@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ApplicationForm from "./ApplicationForm";
 
 export const metadata: Metadata = {
-  title: "Apply For Your Free Website | YourWebsiteNow",
+  title: "Apply For Your Free Website | yourwebsitenow.co.uk",
   description:
     "Start your free website application. Takes just 5 minutes. No credit card required. Your professional website could be live in 3–5 days.",
 };

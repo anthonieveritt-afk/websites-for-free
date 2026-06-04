@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | YourWebsiteNow",
+  title: "Contact Us | yourwebsitenow.co.uk",
   description:
-    "Get in touch with the YourWebsiteNow team. We'd love to hear from you.",
+    "Get in touch with the yourwebsitenow.co.uk team. We'd love to hear from you.",
 };
 
 export default function ContactPage() {

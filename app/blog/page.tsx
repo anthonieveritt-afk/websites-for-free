@@ -3,7 +3,7 @@ import Link from "next/link";
 import { blogPosts } from "@/lib/blog-posts";
 
 export const metadata: Metadata = {
-  title: "Blog | YourWebsiteNow — Tips For UK Small Businesses",
+  title: "Blog | yourwebsitenow.co.uk — Tips For UK Small Businesses",
   description:
     "Practical tips and insights for UK small business owners — websites, SEO, marketing, and more.",
 };

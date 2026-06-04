@@ -15,13 +15,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "YourWebsiteNow | Get A Professional Website Built For Free",
+  title: "yourwebsitenow.co.uk | Get A Professional Website Built For Free",
   description:
     "We build your professional website for free. Try it for 10 days — if you love it, continue for just £29/month. No upfront cost, no design fees, cancel anytime.",
   keywords:
     "free website, professional website, small business website, UK website builder, free web design",
   openGraph: {
-    title: "YourWebsiteNow | Get A Professional Website Built For Free",
+    title: "yourwebsitenow.co.uk | Get A Professional Website Built For Free",
     description:
       "We build your professional website for free. Try it for 10 days — if you love it, continue for just £29/month.",
     type: "website",

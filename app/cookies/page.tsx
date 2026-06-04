@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | YourWebsiteNow",
-  description: "How YourWebsiteNow uses cookies and similar technologies on our website.",
+  title: "Cookie Policy | yourwebsitenow.co.uk",
+  description: "How yourwebsitenow.co.uk uses cookies and similar technologies on our website.",
 };
 
 const cookieTypes = [

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions | YourWebsiteNow",
-  description: "Terms and conditions for YourWebsiteNow website design and hosting services, including the free trial and monthly subscription.",
+  title: "Terms & Conditions | yourwebsitenow.co.uk",
+  description: "Terms and conditions for yourwebsitenow.co.uk website design and hosting services, including the free trial and monthly subscription.",
 };
 
 export default function TermsPage() {
@@ -20,7 +20,7 @@ export default function TermsPage() {
           <div>
             <h2 className="text-xl font-black text-gray-900 mb-3">1. Agreement</h2>
             <p>
-              By submitting an application or using any services provided by YourWebsiteNow 
+              By submitting an application or using any services provided by yourwebsitenow.co.uk 
               (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;), you agree to be bound by these Terms and Conditions. 
               Please read them carefully before proceeding.
             </p>

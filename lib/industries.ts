@@ -25,7 +25,7 @@ export const industries: Industry[] = [
     headline: "Free Website For Electricians",
     subheadline:
       "Get more local jobs with a professional electrician website — built free, live in days.",
-    metaTitle: "Free Website For Electricians | YourWebsiteNow",
+    metaTitle: "Free Website For Electricians | yourwebsitenow.co.uk",
     metaDescription:
       "We build professional websites for electricians completely free. Try it for 10 days, then just £29/month. Get more local leads today.",
     whyNeed: [
@@ -88,7 +88,7 @@ export const industries: Industry[] = [
     headline: "Free Website For Plumbers",
     subheadline:
       "Win more local plumbing jobs with a website that works as hard as you do — built free.",
-    metaTitle: "Free Website For Plumbers | YourWebsiteNow",
+    metaTitle: "Free Website For Plumbers | yourwebsitenow.co.uk",
     metaDescription:
       "Professional websites for plumbers, built free. 10-day free trial, then just £29/month. No setup fee. Cancel anytime.",
     whyNeed: [
@@ -151,7 +151,7 @@ export const industries: Industry[] = [
     headline: "Free Website For Karate Clubs",
     subheadline:
       "Grow your club membership with a professional website — built free, no technical knowledge needed.",
-    metaTitle: "Free Website For Karate Clubs | YourWebsiteNow",
+    metaTitle: "Free Website For Karate Clubs | yourwebsitenow.co.uk",
     metaDescription:
       "We build professional websites for karate clubs free of charge. Get more members, share your timetable, and look professional online.",
     whyNeed: [
@@ -214,7 +214,7 @@ export const industries: Industry[] = [
     headline: "Free Website For Personal Trainers",
     subheadline:
       "Fill your client roster with a professional PT website — built free, ready in days.",
-    metaTitle: "Free Website For Personal Trainers | YourWebsiteNow",
+    metaTitle: "Free Website For Personal Trainers | yourwebsitenow.co.uk",
     metaDescription:
       "Professional websites for personal trainers, built free. Showcase your services, attract new clients, and grow your PT business.",
     whyNeed: [
@@ -277,7 +277,7 @@ export const industries: Industry[] = [
     headline: "Free Website For Restaurants",
     subheadline:
       "Drive more reservations and takeaway orders with a stunning restaurant website — built free.",
-    metaTitle: "Free Website For Restaurants | YourWebsiteNow",
+    metaTitle: "Free Website For Restaurants | yourwebsitenow.co.uk",
     metaDescription:
       "Beautiful restaurant websites built free of charge. Showcase your menu, take online reservations, and attract more diners.",
     whyNeed: [
@@ -340,7 +340,7 @@ export const industries: Industry[] = [
     headline: "Free Website For Beauty & Hair Salons",
     subheadline:
       "Fill your appointment book with a beautiful salon website — built free, ready in days.",
-    metaTitle: "Free Website For Beauty Salons | YourWebsiteNow",
+    metaTitle: "Free Website For Beauty Salons | yourwebsitenow.co.uk",
     metaDescription:
       "Stunning websites for beauty salons and hair stylists, built free. Take online bookings and showcase your work.",
     whyNeed: [
@@ -403,7 +403,7 @@ export const industries: Industry[] = [
     headline: "Free Website For Consultants",
     subheadline:
       "Establish your authority and attract high-value clients with a professional consulting website.",
-    metaTitle: "Free Website For Consultants | YourWebsiteNow",
+    metaTitle: "Free Website For Consultants | yourwebsitenow.co.uk",
     metaDescription:
       "Professional websites for consultants and coaches, built free. Establish authority, attract clients, and grow your practice.",
     whyNeed: [
@@ -466,7 +466,7 @@ export const industries: Industry[] = [
     headline: "Free Website For Gyms & Fitness Studios",
     subheadline:
       "Grow your membership with a powerful gym website — built free, ready to attract new members.",
-    metaTitle: "Free Website For Gyms | YourWebsiteNow",
+    metaTitle: "Free Website For Gyms | yourwebsitenow.co.uk",
     metaDescription:
       "Professional websites for gyms and fitness studios, built free. Showcase classes, attract members, and grow your fitness business.",
     whyNeed: [
