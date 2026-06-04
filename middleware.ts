@@ -1,13 +1,28 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
 const isAdminRoute = createRouteMatcher(["/admin(.*)"]);
 const isClientRoute = createRouteMatcher(["/dashboard(.*)"]);
 
-export default clerkMiddleware(async (auth, req) => {
-  if (isAdminRoute(req) || isClientRoute(req)) {
-    await auth.protect();
-  }
-});
+// If Clerk keys aren't configured yet, skip auth entirely (allows public site to work)
+const clerkConfigured =
+  !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+  !!process.env.CLERK_SECRET_KEY;
+
+export default clerkConfigured
+  ? clerkMiddleware(async (auth, req) => {
+      if (isAdminRoute(req) || isClientRoute(req)) {
+        await auth.protect();
+      }
+    })
+  : function middleware(req: NextRequest) {
+      // Clerk not configured — block admin/dashboard with a plain message
+      if (isAdminRoute(req) || isClientRoute(req)) {
+        return new NextResponse("Admin area — Clerk auth not yet configured.", { status: 503 });
+      }
+      return NextResponse.next();
+    };
 
 export const config = {
   matcher: [
