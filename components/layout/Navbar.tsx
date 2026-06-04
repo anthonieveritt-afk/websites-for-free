@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { BRAND } from "@/lib/config/brand";
 
 const navLinks = [
   { href: "/how-it-works", label: "How It Works" },
@@ -31,8 +32,8 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-black text-indigo-600 tracking-tight">
-            Websites<span className="text-gray-900">ForFree</span>
+          <span className="text-lg font-black text-indigo-600 tracking-tight">
+            {BRAND.domain}
           </span>
         </Link>
 
