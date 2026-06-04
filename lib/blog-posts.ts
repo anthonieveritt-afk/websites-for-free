@@ -47,7 +47,7 @@ Many small business owners think a Facebook page or Instagram account is suffici
 
 ## The Cost Argument No Longer Holds
 
-The number one reason small businesses cite for not having a website is cost. But with WebsitesForFree, that barrier is gone. We build your professional website for free — you only pay if you love the result.
+The number one reason small businesses cite for not having a website is cost. But with YourWebsiteNow, that barrier is gone. We build your professional website for free — you only pay if you love the result.
 
 There's never been a better time to get online. And there's never been an easier way to do it.
     `.trim(),
@@ -138,7 +138,7 @@ If you Google your own business type + your town and you don't appear in the fir
 
 ## The Fix
 
-All of these problems are solvable — and with WebsitesForFree, they're solvable for free. We build modern, fast, mobile-first websites that are designed to convert visitors into customers from day one.
+All of these problems are solvable — and with YourWebsiteNow, they're solvable for free. We build modern, fast, mobile-first websites that are designed to convert visitors into customers from day one.
     `.trim(),
   },
   {
@@ -186,7 +186,7 @@ To rank in local Google searches:
 
 ## How to Get Your Electrician Website Built for Free
 
-With WebsitesForFree, the entire process is handled for you:
+With YourWebsiteNow, the entire process is handled for you:
 
 1. Fill in our short application (5 minutes)
 2. We build your site within 3–5 days
@@ -254,7 +254,7 @@ Get your business listed consistently on directories like Yell, Yelp, and indust
 
 ## How Long Does SEO Take?
 
-SEO is a long-term strategy. Most websites see meaningful improvement in 3–6 months of consistent effort. But the good news? Every website we build at WebsitesForFree is SEO-ready from day one, giving you the best possible starting point.
+SEO is a long-term strategy. Most websites see meaningful improvement in 3–6 months of consistent effort. But the good news? Every website we build at YourWebsiteNow is SEO-ready from day one, giving you the best possible starting point.
     `.trim(),
   },
   {
@@ -309,7 +309,7 @@ Use social platforms to create content, run ads, and build relationships. Use yo
 
 You need both — but your website should be your foundation. Social media is the megaphone; your website is the home. Start with a great website, then use social media to fill it with traffic.
 
-And with WebsitesForFree, getting that foundation costs you nothing upfront.
+And with YourWebsiteNow, getting that foundation costs you nothing upfront.
     `.trim(),
   },
 ];

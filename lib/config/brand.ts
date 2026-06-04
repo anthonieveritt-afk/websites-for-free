@@ -3,17 +3,17 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const BRAND = {
-  name: "WebsitesForFree",
+  name: "YourWebsiteNow",
   tagline: "Get A Professional Website Built For Free",
-  domain: "websitesforfree.co.uk",
-  email: "hello@websitesforfree.co.uk",
-  trialSubdomainSuffix: ".websitesforfree.co.uk",
+  domain: "yourwebsitenow.co.uk",
+  email: "hello@yourwebsitenow.co.uk",
+  trialSubdomainSuffix: ".yourwebsitenow.co.uk",
   trialDays: 10,
   gracePeriodDays: 2,
   paymentFailureGraceDays: 5,
   social: {
-    twitter: "https://twitter.com/websitesforfree",
-    instagram: "https://instagram.com/websitesforfree",
+    twitter: "https://twitter.com/yourwebsitenow",
+    instagram: "https://instagram.com/yourwebsitenow",
   },
 } as const;
 

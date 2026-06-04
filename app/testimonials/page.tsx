@@ -3,9 +3,9 @@ import Link from "next/link";
 import Testimonials from "@/components/sections/Testimonials";
 
 export const metadata: Metadata = {
-  title: "Customer Reviews | WebsitesForFree — ★★★★★",
+  title: "Customer Reviews | YourWebsiteNow — ★★★★★",
   description:
-    "Read real reviews from UK small business owners who got their professional website built free with WebsitesForFree.",
+    "Read real reviews from UK small business owners who got their professional website built free with YourWebsiteNow.",
 };
 
 export default function TestimonialsPage() {

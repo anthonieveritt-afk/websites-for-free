@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions | WebsitesForFree",
-  description: "Terms and conditions for WebsitesForFree website design and hosting services, including the free trial and monthly subscription.",
+  title: "Terms & Conditions | YourWebsiteNow",
+  description: "Terms and conditions for YourWebsiteNow website design and hosting services, including the free trial and monthly subscription.",
 };
 
 export default function TermsPage() {
@@ -20,7 +20,7 @@ export default function TermsPage() {
           <div>
             <h2 className="text-xl font-black text-gray-900 mb-3">1. Agreement</h2>
             <p>
-              By submitting an application or using any services provided by WebsitesForFree 
+              By submitting an application or using any services provided by YourWebsiteNow 
               (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;), you agree to be bound by these Terms and Conditions. 
               Please read them carefully before proceeding.
             </p>
@@ -145,8 +145,8 @@ export default function TermsPage() {
             <h2 className="text-xl font-black text-gray-900 mb-3">10. Contact</h2>
             <p>
               For questions about these terms, contact us at{" "}
-              <a href="mailto:hello@websitesforfree.co.uk" className="text-indigo-600 hover:underline">
-                hello@websitesforfree.co.uk
+              <a href="mailto:hello@yourwebsitenow.co.uk" className="text-indigo-600 hover:underline">
+                hello@yourwebsitenow.co.uk
               </a>
             </p>
           </div>

@@ -51,7 +51,7 @@ export default function FloatingChat() {
                 WF
               </div>
               <div>
-                <div className="text-white font-semibold text-sm">WebsitesForFree</div>
+                <div className="text-white font-semibold text-sm">YourWebsiteNow</div>
                 <div className="text-indigo-200 text-xs flex items-center gap-1">
                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   Online now
@@ -69,7 +69,7 @@ export default function FloatingChat() {
           {/* Body */}
           <div className="p-4">
             <div className="bg-gray-50 rounded-xl p-3 mb-4 text-sm text-gray-700 leading-relaxed">
-              👋 Hi! I&apos;m here to answer any questions about WebsitesForFree. What would you like to know?
+              👋 Hi! I&apos;m here to answer any questions about YourWebsiteNow. What would you like to know?
             </div>
 
             {reply ? (

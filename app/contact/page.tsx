@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact Us | WebsitesForFree",
+  title: "Contact Us | YourWebsiteNow",
   description:
-    "Get in touch with the WebsitesForFree team. We'd love to hear from you.",
+    "Get in touch with the YourWebsiteNow team. We'd love to hear from you.",
 };
 
 export default function ContactPage() {
@@ -30,8 +30,8 @@ export default function ContactPage() {
                   {
                     icon: "📧",
                     label: "Email",
-                    value: "hello@websitesforfree.co.uk",
-                    href: "mailto:hello@websitesforfree.co.uk",
+                    value: "hello@yourwebsitenow.co.uk",
+                    href: "mailto:hello@yourwebsitenow.co.uk",
                   },
                   {
                     icon: "📞",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "How It Works | WebsitesForFree",
+  title: "How It Works | YourWebsiteNow",
   description:
     "Learn exactly how we build your professional website for free in 5 simple steps — from application to live website in less than a week.",
 };

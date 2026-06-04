@@ -3,7 +3,7 @@ import Link from "next/link";
 import PortfolioGrid from "@/components/sections/PortfolioGrid";
 
 export const metadata: Metadata = {
-  title: "Portfolio | WebsitesForFree — Example Websites",
+  title: "Portfolio | YourWebsiteNow — Example Websites",
   description:
     "Browse our portfolio of professionally built websites for UK small businesses. Filter by industry to see what we can build for you.",
 };

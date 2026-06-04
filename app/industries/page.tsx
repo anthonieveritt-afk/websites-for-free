@@ -3,7 +3,7 @@ import Link from "next/link";
 import { industries } from "@/lib/industries";
 
 export const metadata: Metadata = {
-  title: "Industries We Serve | WebsitesForFree",
+  title: "Industries We Serve | YourWebsiteNow",
   description:
     "We build free professional websites for all types of UK small businesses — from electricians and plumbers to restaurants, gyms, and consultants.",
 };

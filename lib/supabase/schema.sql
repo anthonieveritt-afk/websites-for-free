@@ -1,5 +1,5 @@
 -- ─────────────────────────────────────────────────────────────────────────────
--- WebsitesForFree — Supabase Schema
+-- YourWebsiteNow — Supabase Schema
 -- Run this in your Supabase SQL editor to set up the database
 -- ─────────────────────────────────────────────────────────────────────────────
 

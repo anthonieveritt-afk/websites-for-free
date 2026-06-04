@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | WebsitesForFree",
-  description: "How WebsitesForFree uses cookies and similar technologies on our website.",
+  title: "Cookie Policy | YourWebsiteNow",
+  description: "How YourWebsiteNow uses cookies and similar technologies on our website.",
 };
 
 const cookieTypes = [
@@ -113,8 +113,8 @@ export default function CookiesPage() {
             <h2 className="text-xl font-black text-gray-900 mb-3">Contact Us</h2>
             <p>
               If you have questions about our use of cookies, please contact us at{" "}
-              <a href="mailto:hello@websitesforfree.co.uk" className="text-indigo-600 hover:underline">
-                hello@websitesforfree.co.uk
+              <a href="mailto:hello@yourwebsitenow.co.uk" className="text-indigo-600 hover:underline">
+                hello@yourwebsitenow.co.uk
               </a>
             </p>
           </div>

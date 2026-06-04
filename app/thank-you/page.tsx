@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Application Received! | WebsitesForFree",
+  title: "Application Received! | YourWebsiteNow",
   description: "Your website application has been received. We'll be in touch within 24 hours.",
 };
 
@@ -69,7 +69,7 @@ export default function ThankYouPage() {
             🗣 Know another business that could use a free website?
           </p>
           <a
-            href="https://wa.me/?text=I%20just%20applied%20for%20a%20free%20professional%20website%20from%20WebsitesForFree.%20Check%20it%20out%3A%20https%3A%2F%2Fwebsitesforfree.co.uk"
+            href="https://wa.me/?text=I%20just%20applied%20for%20a%20free%20professional%20website%20from%20YourWebsiteNow.%20Check%20it%20out%3A%20https%3A%2F%2Fyourwebsitenow.co.uk"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-full text-sm transition-all shadow-md"

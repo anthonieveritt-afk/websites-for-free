@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
 
   return {
-    title: `${post.title} | WebsitesForFree Blog`,
+    title: `${post.title} | YourWebsiteNow Blog`,
     description: post.excerpt,
   };
 }

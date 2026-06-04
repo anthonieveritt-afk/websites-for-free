@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | WebsitesForFree",
-  description: "WebsitesForFree privacy policy — how we collect, use, and protect your personal data in compliance with UK GDPR.",
+  title: "Privacy Policy | YourWebsiteNow",
+  description: "YourWebsiteNow privacy policy — how we collect, use, and protect your personal data in compliance with UK GDPR.",
 };
 
 export default function PrivacyPage() {
@@ -21,11 +21,11 @@ export default function PrivacyPage() {
             <div>
               <h2 className="text-xl font-black text-gray-900 mb-3">1. Who We Are</h2>
               <p>
-                WebsitesForFree (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is registered in England and Wales. We operate 
-                the website at websitesforfree.co.uk and provide website design and hosting services. 
+                YourWebsiteNow (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is registered in England and Wales. We operate 
+                the website at yourwebsitenow.co.uk and provide website design and hosting services. 
                 We are the data controller for personal information collected through our website and services.
               </p>
-              <p className="mt-2">Contact: hello@websitesforfree.co.uk</p>
+              <p className="mt-2">Contact: hello@yourwebsitenow.co.uk</p>
             </div>
 
             <div>
@@ -96,7 +96,7 @@ export default function PrivacyPage() {
                 <li><strong>Restriction:</strong> Request we restrict processing of your data</li>
               </ul>
               <p className="mt-3">
-                To exercise any of these rights, contact us at hello@websitesforfree.co.uk.
+                To exercise any of these rights, contact us at hello@yourwebsitenow.co.uk.
               </p>
             </div>
 
