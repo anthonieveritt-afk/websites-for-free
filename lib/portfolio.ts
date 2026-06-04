@@ -8,6 +8,7 @@ export interface PortfolioItem {
   color: string;
   bgColor: string;
   tags: string[];
+  liveUrl?: string;
 }
 
 export const portfolioItems: PortfolioItem[] = [
@@ -153,6 +154,7 @@ export const portfolioItems: PortfolioItem[] = [
     color: "#dc2626",
     bgColor: "#fee2e2",
     tags: ["Members Area", "Gallery", "Gradings"],
+    liveUrl: "https://forza-karate-website.vercel.app",
   },
   {
     id: "14",
@@ -164,6 +166,7 @@ export const portfolioItems: PortfolioItem[] = [
     color: "#2563eb",
     bgColor: "#dbeafe",
     tags: ["Timetable", "Gradings", "Members Area"],
+    liveUrl: "https://jhka-website.vercel.app",
   },
   {
     id: "15",
@@ -175,6 +178,7 @@ export const portfolioItems: PortfolioItem[] = [
     color: "#16a34a",
     bgColor: "#dcfce7",
     tags: ["Fixtures", "Squad", "Membership"],
+    liveUrl: "https://jgfa-marketing.vercel.app",
   },
   {
     id: "16",

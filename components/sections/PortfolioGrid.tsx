@@ -73,12 +73,25 @@ export default function PortfolioGrid({ limit, showFilter = true }: PortfolioGri
                   </span>
                 ))}
               </div>
-              <Link
-                href="/apply"
-                className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors"
-              >
-                This is what we can build for you →
-              </Link>
+              <div className="flex items-center justify-between">
+                <Link
+                  href="/apply"
+                  className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 transition-colors"
+                >
+                  Build one like this →
+                </Link>
+                {item.liveUrl && (
+                  <a
+                    href={item.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-semibold text-gray-400 hover:text-gray-600 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    View site ↗
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ))}
