@@ -56,6 +56,7 @@ export interface Application {
   how_found: string | null;
   special_notes: string | null;
   coupon_code: string | null;
+  location: string | null;
   domain_status: string | null;
   existing_domain: string | null;
   current_website: string | null;

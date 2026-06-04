@@ -5,6 +5,7 @@ import { Application, Note, STATUS_LABELS, STATUS_COLOURS, ApplicationStatus } f
 import StatusChanger from "./StatusChanger";
 import NoteAdder from "./NoteAdder";
 import ServicesChecklist from "./ServicesChecklist";
+import DeployPanel from "./DeployPanel";
 
 export const dynamic = "force-dynamic";
 
@@ -203,17 +204,23 @@ export default async function ApplicationPage({ params }: { params: Promise<{ id
             />
           </div>
 
-          {/* Generate brief button */}
+          {/* Deploy panel */}
           <div className="bg-indigo-50 rounded-2xl border border-indigo-100 p-5">
-            <h3 className="font-bold text-indigo-900 mb-1">Generate Website Brief</h3>
-            <p className="text-xs text-indigo-600 mb-3">Export all client answers as a structured build brief.</p>
-            <a
-              href={`/api/admin/applications/${app.id}/brief`}
-              target="_blank"
-              className="block text-center bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold py-2.5 px-4 rounded-full transition-all"
-            >
-              Download Brief →
-            </a>
+            <h3 className="font-bold text-indigo-900 mb-1">Website Build</h3>
+            <p className="text-xs text-indigo-600 mb-4">Generate and deploy a website from this client's application data.</p>
+            <DeployPanel
+              applicationId={app.id}
+              currentPreviewUrl={null}
+            />
+            <div className="mt-3 pt-3 border-t border-indigo-100">
+              <a
+                href={`/api/admin/applications/${app.id}/brief`}
+                target="_blank"
+                className="block text-center text-indigo-600 hover:text-indigo-700 text-xs font-semibold py-2 transition-all"
+              >
+                Download text brief instead →
+              </a>
+            </div>
           </div>
         </div>
       </div>
