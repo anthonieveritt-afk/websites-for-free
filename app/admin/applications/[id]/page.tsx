@@ -4,6 +4,7 @@ import { createServiceClient } from "@/lib/supabase/server";
 import { Application, Note, STATUS_LABELS, STATUS_COLOURS, ApplicationStatus } from "@/lib/types/application";
 import StatusChanger from "./StatusChanger";
 import NoteAdder from "./NoteAdder";
+import ServicesChecklist from "./ServicesChecklist";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +20,7 @@ async function getData(id: string) {
     return { app: null, notes: [] };
   }
 }
+
 
 function InfoRow({ label, value }: { label: string; value?: string | null }) {
   if (!value) return null;
@@ -191,6 +193,15 @@ export default async function ApplicationPage({ params }: { params: Promise<{ id
               )}
             </div>
           </Section>
+
+          {/* Services checklist */}
+          <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+            <h3 className="font-bold text-gray-900 mb-4">Services Delivered</h3>
+            <ServicesChecklist
+              applicationId={app.id}
+              initial={(app as Application & { services_checklist?: Record<string, boolean> }).services_checklist ?? {}}
+            />
+          </div>
 
           {/* Generate brief button */}
           <div className="bg-indigo-50 rounded-2xl border border-indigo-100 p-5">
