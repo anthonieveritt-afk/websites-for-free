@@ -1,6 +1,8 @@
 import { UserButton, Show } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { BRAND } from "@/lib/config/brand";
+import { createServiceClient } from "@/lib/supabase/server";
 
 const navItems = [
   { href: "/admin", label: "Applications", icon: "📋" },
@@ -8,7 +10,29 @@ const navItems = [
   { href: "/admin/team", label: "Team", icon: "👥" },
 ];
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+async function syncUser() {
+  try {
+    const { userId } = await auth();
+    if (!userId) return;
+    const supabase = createServiceClient();
+    const { data: existing } = await supabase
+      .from("platform_users")
+      .select("id")
+      .eq("clerk_id", userId)
+      .single();
+    if (!existing) {
+      const { count } = await supabase
+        .from("platform_users")
+        .select("*", { count: "exact", head: true })
+        .eq("role", "admin");
+      const role = (count ?? 0) === 0 ? "admin" : "client";
+      await supabase.from("platform_users").insert({ clerk_id: userId, email: "", role });
+    }
+  } catch {}
+}
+
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  await syncUser();
   return (
     <div className="h-screen bg-gray-50 flex overflow-hidden">
       {/* Sidebar */}
