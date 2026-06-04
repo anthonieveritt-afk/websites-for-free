@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import StickyCtaBar from "@/components/layout/StickyCtaBar";
@@ -34,15 +35,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
-      <body className="min-h-full flex flex-col font-[Inter,sans-serif]">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <StickyCtaBar />
-        <FloatingChat />
-        <SocialProofToast />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className={`${inter.variable} h-full`}>
+        <body className="min-h-full flex flex-col font-[Inter,sans-serif]">
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <StickyCtaBar />
+          <FloatingChat />
+          <SocialProofToast />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
