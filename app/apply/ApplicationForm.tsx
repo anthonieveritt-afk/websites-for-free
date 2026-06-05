@@ -107,6 +107,7 @@ export default function ApplicationForm() {
   const [form, setForm] = useState<FormData>(initialData);
   const [submitting, setSubmitting] = useState(false);
   const [uploading, setUploading] = useState<string | null>(null);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const router = useRouter();
 
   function update(key: keyof FormData, value: string) {
@@ -132,9 +133,15 @@ export default function ApplicationForm() {
       const res = await fetch("/api/upload", { method: "POST", body: fd });
       const json = await res.json();
       setUploading(null);
-      return json.url ?? null;
+      if (!res.ok || !json.url) {
+        setUploadError(json.error ?? "Upload failed — please try again.");
+        return null;
+      }
+      setUploadError(null);
+      return json.url;
     } catch {
       setUploading(null);
+      setUploadError("Upload failed — check your connection and try again.");
       return null;
     }
   }
@@ -388,6 +395,12 @@ export default function ApplicationForm() {
             <h2 className="text-2xl font-black text-gray-900 mb-1">Photos &amp; Branding</h2>
             <p className="text-gray-500 text-sm">Upload your logo and photos — we&apos;ll use these to build your website. All optional but recommended.</p>
           </div>
+
+          {uploadError && (
+            <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3">
+              ⚠️ {uploadError}
+            </div>
+          )}
 
           {/* Logo */}
           <div>

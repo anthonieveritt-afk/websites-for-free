@@ -76,9 +76,9 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
   const goals = (app.goals as string[]) ?? [];
 
   // Pull uploaded images
-  const logoUrl = (app as Application & { logo_url?: string }).logo_url ?? null;
-  const heroImageUrl = (app as Application & { heroUrl?: string }).heroUrl ?? null;
-  const galleryImageUrls: string[] = (app as Application & { galleryUrls?: string[] }).galleryUrls ?? [];
+  const logoUrl = app.logo_url ?? null;
+  const heroImageUrl = app.hero_url ?? null;
+  const galleryImageUrls: string[] = app.gallery_urls ?? [];
 
   // ─── index.html ────────────────────────────────────────────────────────────
   const indexHtml = `<!DOCTYPE html>
@@ -95,7 +95,7 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
     a { color: var(--accent); text-decoration: none; }
     /* NAV */
     nav { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
-    .nav-logo { font-weight: 800; font-size: 1.1rem; color: var(--dark); }
+    .nav-logo { font-weight: 800; font-size: 1.1rem; color: var(--dark); display: flex; align-items: center; }
     .nav-links { display: flex; gap: 1.5rem; }
     .nav-links a { font-size: 0.9rem; font-weight: 500; color: #6b7280; }
     .nav-links a:hover { color: var(--accent); }
@@ -138,7 +138,7 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">${logoUrl ? `<img src="${logoUrl}" alt="${app.business_name} logo" style="height:36px;object-fit:contain;"/>` : app.business_name}</div>
+    <div class="nav-logo">${logoUrl ? `<img src="${logoUrl}" alt="${app.business_name} logo" style="height:56px;max-width:200px;object-fit:contain;"/>` : app.business_name}</div>
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#about">About</a>

@@ -62,6 +62,9 @@ export interface Application {
   current_website: string | null;
   ideal_customers: string | null;
   competitor_urls: string | null;
+  logo_url: string | null;
+  hero_url: string | null;
+  gallery_urls: string[];
   assigned_to: string | null;
   trial_start_at: string | null;
   trial_end_at: string | null;
