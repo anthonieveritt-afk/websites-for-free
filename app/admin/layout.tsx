@@ -5,9 +5,14 @@ import { BRAND } from "@/lib/config/brand";
 import { createServiceClient } from "@/lib/supabase/server";
 
 const navItems = [
-  { href: "/admin", label: "Applications", icon: "📋" },
+  { href: "/admin", label: "Dashboard", icon: "📊" },
+  { href: "/admin/applications", label: "Applications", icon: "📋" },
+  { href: "/admin/websites", label: "Websites", icon: "🌐" },
+  { href: "/admin/billing", label: "Billing", icon: "💳" },
+  { href: "/admin/media", label: "Media", icon: "🖼️" },
   { href: "/admin/coupons", label: "Coupons", icon: "🎟️" },
   { href: "/admin/team", label: "Team", icon: "👥" },
+  { href: "/admin/settings", label: "Settings", icon: "⚙️" },
   { href: "/admin/profile", label: "Profile", icon: "👤" },
 ];
 
