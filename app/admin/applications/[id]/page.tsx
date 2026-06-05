@@ -7,6 +7,7 @@ import NoteAdder from "./NoteAdder";
 import ServicesChecklist from "./ServicesChecklist";
 import DeployPanel from "./DeployPanel";
 import SendPaymentLink from "./SendPaymentLink";
+import PlanSelector from "./PlanSelector";
 
 export const dynamic = "force-dynamic";
 
@@ -142,10 +143,8 @@ export default async function ApplicationPage({ params }: { params: Promise<{ id
         <div className="space-y-4">
           <Section title="Package">
             <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-500">Plan</span>
-                <span className="font-bold capitalize text-gray-900">{app.package ?? "Not set"}</span>
-              </div>
+              <PlanSelector applicationId={app.id} currentPlan={app.package} />
+              <div className="flex justify-between text-sm pt-1">
               {app.wants_basic_shop && (
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">Add-on</span>
