@@ -6,6 +6,7 @@ import StatusChanger from "./StatusChanger";
 import NoteAdder from "./NoteAdder";
 import ServicesChecklist from "./ServicesChecklist";
 import DeployPanel from "./DeployPanel";
+import SendPaymentLink from "./SendPaymentLink";
 
 export const dynamic = "force-dynamic";
 
@@ -201,6 +202,18 @@ export default async function ApplicationPage({ params }: { params: Promise<{ id
             <ServicesChecklist
               applicationId={app.id}
               initial={(app as Application & { services_checklist?: Record<string, boolean> }).services_checklist ?? {}}
+            />
+          </div>
+
+          {/* Payment link */}
+          <div className="bg-emerald-50 rounded-2xl border border-emerald-100 p-5">
+            <h3 className="font-bold text-emerald-900 mb-1">Payment</h3>
+            <p className="text-xs text-emerald-600 mb-4">Once the client is happy with their preview, send them the payment link to start their trial.</p>
+            <SendPaymentLink
+              applicationId={app.id}
+              email={app.email}
+              plan={app.package}
+              hasBasicShop={app.wants_basic_shop}
             />
           </div>
 
