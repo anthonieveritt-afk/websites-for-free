@@ -18,9 +18,9 @@ export const BRAND = {
 } as const;
 
 export const PLANS = {
-  starter: { name: "Starter", price: 29, maxPages: 5, stripePriceId: "" },
-  growth:  { name: "Growth",  price: 49, maxPages: 10, stripePriceId: "" },
-  pro:     { name: "Pro",     price: 79, maxPages: Infinity, stripePriceId: "" },
+  starter: { name: "Starter", price: 29, maxPages: 5, stripePriceId: "price_1TemJFQszIKqGgeVUoBm2j0l" },
+  growth:  { name: "Growth",  price: 49, maxPages: 10, stripePriceId: "price_1TemJGQszIKqGgeVsIZ0vyMm" },
+  pro:     { name: "Pro",     price: 79, maxPages: Infinity, stripePriceId: "price_1TemJGQszIKqGgeVl573SGiJ" },
 } as const;
 
 export const ADDONS = {
