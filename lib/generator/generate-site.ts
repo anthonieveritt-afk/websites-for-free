@@ -94,7 +94,7 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--dark); line-height: 1.6; }
     a { color: var(--accent); text-decoration: none; }
     /* NAV */
-    nav { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 80px; position: sticky; top: 0; z-index: 100; }
+    nav { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 150px; position: sticky; top: 0; z-index: 100; }
     .nav-logo { font-weight: 800; font-size: 1.1rem; color: var(--dark); display: flex; align-items: center; }
     .nav-links { display: flex; gap: 1.5rem; }
     .nav-links a { font-size: 0.9rem; font-weight: 500; color: #6b7280; }
@@ -138,7 +138,7 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo">${logoUrl ? `<img src="${logoUrl}" alt="${app.business_name} logo" style="height:64px;max-width:240px;object-fit:contain;"/>` : app.business_name}</div>
+    <div class="nav-logo">${logoUrl ? `<img src="${logoUrl}" alt="${app.business_name} logo" style="height:128px;max-width:360px;object-fit:contain;"/>` : app.business_name}</div>
     <div class="nav-links">
       <a href="#services">Services</a>
       <a href="#about">About</a>
