@@ -80,6 +80,16 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
   const heroImageUrl = app.hero_url ?? null;
   const galleryImageUrls: string[] = app.gallery_urls ?? [];
 
+  // Industry fallback hero photos (Unsplash)
+  const industryPhotos: Record<string, string> = {
+    "Beauty Salon / Hair": "https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=1400&q=80",
+    "Gym / Fitness Studio": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1400&q=80",
+    "Restaurant / Café": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=80",
+    "Personal Trainer": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1400&q=80",
+    "Karate Club / Martial Arts": "https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&w=1400&q=80",
+  };
+  const heroPhoto = heroImageUrl ?? industryPhotos[app.industry ?? ""] ?? null;
+
   // ─── index.html ────────────────────────────────────────────────────────────
   const indexHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -101,13 +111,16 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
     .nav-links a:hover { color: var(--accent); }
     .nav-cta { background: var(--accent); color: #fff !important; padding: 0.5rem 1.25rem; border-radius: 999px; font-weight: 600 !important; font-size: 0.875rem !important; }
     /* HERO */
-    .hero { ${heroImageUrl ? `background: linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)), url('${heroImageUrl}') center/cover no-repeat; padding: 5rem 1.5rem; text-align: center;` : `background: linear-gradient(135deg, var(--accent)22, var(--accent)08); padding: 5rem 1.5rem; text-align: center;`} }
-    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--dark); margin-bottom: 1rem; }
-    .hero h1 span { color: var(--accent); }
-    .hero p { font-size: 1.125rem; color: #6b7280; max-width: 560px; margin: 0 auto 2rem; }
+    .hero { position: relative; display: flex; align-items: center; background: #fff; overflow: hidden; min-height: 520px; }
+    .hero-content { position: relative; z-index: 2; width: 52%; padding: 5rem 2rem 5rem 1.5rem; }
+    .hero-img { position: absolute; right: 0; top: 0; width: 62%; height: 100%; ${heroPhoto ? `background: url('${heroPhoto}') center/cover no-repeat;` : 'background: linear-gradient(135deg, var(--accent)22, var(--accent)08);'} }
+    .hero-img::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, #fff 0%, rgba(255,255,255,0.9) 20%, rgba(255,255,255,0.3) 55%, transparent 80%); }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 900; color: #5BC0EB; margin-bottom: 1rem; line-height: 1.15; }
+    .hero h1 span { color: #3aa8d8; }
+    .hero p { font-size: 1.05rem; color: #5BC0EB; max-width: 440px; margin-bottom: 2rem; opacity: 0.85; }
     .btn { display: inline-block; background: var(--accent); color: #fff; padding: 0.85rem 2rem; border-radius: 999px; font-weight: 700; font-size: 1rem; transition: opacity .2s; }
     .btn:hover { opacity: 0.9; }
-    .btn-ghost { background: transparent; color: var(--accent); border: 2px solid var(--accent); margin-left: 1rem; }
+    .btn-ghost { background: transparent; color: #5BC0EB; border: 2px solid #5BC0EB; margin-left: 1rem; }
     /* SECTIONS */
     section { padding: 4rem 1.5rem; }
     .container { max-width: 1100px; margin: 0 auto; }
@@ -122,7 +135,7 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
     /* ABOUT */
     .about { background: var(--light); }
     .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-    @media(max-width:700px){ .about-inner { grid-template-columns: 1fr; } .nav-links { display: none; } }
+    @media(max-width:700px){ .about-inner { grid-template-columns: 1fr; } .nav-links { display: none; } .hero { flex-direction: column; min-height: auto; } .hero-content { width: 100%; padding: 3rem 1.5rem 2rem; } .hero-img { position: relative; width: 100%; height: 260px; } .hero-img::before { background: linear-gradient(to bottom, transparent 40%, #fff 100%); } }
     /* CONTACT */
     .contact { background: #fff; }
     form { display: flex; flex-direction: column; gap: 1rem; max-width: 560px; }
@@ -149,12 +162,13 @@ export function generateSiteFiles(app: Application): GeneratedFile[] {
 
   <!-- HERO -->
   <section class="hero">
-    <div class="container">
-      <h1 style="${heroImageUrl ? 'color:#fff;' : ''}">${app.business_name}<br/><span style="${heroImageUrl ? 'color:#fff;opacity:0.85;' : ''}">${copy.tagline}</span></h1>
-      <p style="${heroImageUrl ? 'color:rgba(255,255,255,0.85);' : ''}">${app.ideal_customers ? `Serving ${app.ideal_customers}` : copy.heroSub}</p>
-      <a href="#contact" class="btn">Contact Us Today</a>
+    <div class="hero-content">
+      <h1>${app.business_name}<br/><span>${copy.tagline}</span></h1>
+      <p>${app.ideal_customers ? `Serving ${app.ideal_customers}` : copy.heroSub}</p>
+      <a href="#contact" class="btn" style="background:#5BC0EB;border:none;">Contact Us Today</a>
       <a href="#services" class="btn btn-ghost">Our Services</a>
     </div>
+    <div class="hero-img"></div>
   </section>
 
   <!-- SERVICES -->
