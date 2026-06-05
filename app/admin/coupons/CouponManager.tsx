@@ -33,7 +33,49 @@ export default function CouponManager({ coupons }: { coupons: Coupon[] }) {
   const [saving, setSaving] = useState(false);
   const [togglingId, setTogglingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState(emptyForm);
+  const [editSaving, setEditSaving] = useState(false);
+  const [editError, setEditError] = useState<string | null>(null);
   const router = useRouter();
+
+  function startEdit(c: Coupon) {
+    setEditingId(c.id);
+    setEditForm({
+      code: c.code,
+      description: c.description ?? "",
+      discount_type: c.discount_type,
+      discount_value: String(c.discount_value),
+      applicable_plans: c.applicable_plans ?? ["starter", "growth", "pro"],
+      expiry_at: c.expiry_at ? c.expiry_at.split("T")[0] : "",
+      max_uses: c.max_uses !== null ? String(c.max_uses) : "",
+    });
+    setEditError(null);
+  }
+
+  async function saveEdit(id: string) {
+    if (!editForm.code || !editForm.discount_value) return;
+    setEditSaving(true);
+    setEditError(null);
+    const res = await fetch(`/api/admin/coupons/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        code: editForm.code.toUpperCase(),
+        description: editForm.description || null,
+        discount_type: editForm.discount_type,
+        discount_value: Number(editForm.discount_value),
+        applicable_plans: editForm.applicable_plans,
+        expiry_at: editForm.expiry_at || null,
+        max_uses: editForm.max_uses ? Number(editForm.max_uses) : null,
+      }),
+    });
+    const json = await res.json();
+    setEditSaving(false);
+    if (!res.ok) { setEditError(json.error ?? "Save failed"); return; }
+    setEditingId(null);
+    router.refresh();
+  }
 
   function update(key: keyof typeof emptyForm, value: string) {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -201,6 +243,10 @@ export default function CouponManager({ coupons }: { coupons: Coupon[] }) {
                   {c.expiry_at ? new Date(c.expiry_at).toLocaleDateString("en-GB") : "No expiry"}
                 </div>
 
+                <button onClick={() => startEdit(c)}
+                  className="text-xs font-bold px-3 py-1.5 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-all">
+                  Edit
+                </button>
                 <button onClick={() => toggleEnabled(c.id, c.enabled)} disabled={togglingId === c.id}
                   className={`text-xs font-bold px-3 py-1.5 rounded-full transition-all ${
                     c.enabled
@@ -210,6 +256,72 @@ export default function CouponManager({ coupons }: { coupons: Coupon[] }) {
                   {togglingId === c.id ? "…" : c.enabled ? "Disable" : "Enable"}
                 </button>
               </div>
+
+              {/* Inline edit form */}
+              {editingId === c.id && (
+                <div className="px-6 pb-5 pt-2 border-t border-gray-50 bg-gray-50/50">
+                  <div className="grid sm:grid-cols-2 gap-3 mb-3">
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Code</label>
+                      <input className={inputClass} value={editForm.code}
+                        onChange={(e) => setEditForm((p) => ({ ...p, code: e.target.value.toUpperCase() }))} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Description</label>
+                      <input className={inputClass} value={editForm.description}
+                        onChange={(e) => setEditForm((p) => ({ ...p, description: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Discount type</label>
+                      <select className={inputClass} value={editForm.discount_type}
+                        onChange={(e) => setEditForm((p) => ({ ...p, discount_type: e.target.value as "percentage" | "fixed" }))}>
+                        <option value="percentage">Percentage (%)</option>
+                        <option value="fixed">Fixed (£)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Value</label>
+                      <input className={inputClass} type="number" value={editForm.discount_value}
+                        onChange={(e) => setEditForm((p) => ({ ...p, discount_value: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Expiry date</label>
+                      <input className={inputClass} type="date" value={editForm.expiry_at}
+                        onChange={(e) => setEditForm((p) => ({ ...p, expiry_at: e.target.value }))} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">Max uses</label>
+                      <input className={inputClass} type="number" placeholder="Unlimited" value={editForm.max_uses}
+                        onChange={(e) => setEditForm((p) => ({ ...p, max_uses: e.target.value }))} />
+                    </div>
+                  </div>
+                  <div className="mb-3">
+                    <label className="block text-xs font-semibold text-gray-600 mb-1.5">Applicable plans</label>
+                    <div className="flex gap-2">
+                      {["starter", "growth", "pro"].map((plan) => (
+                        <button key={plan} type="button"
+                          onClick={() => setEditForm((p) => ({ ...p, applicable_plans: p.applicable_plans.includes(plan) ? p.applicable_plans.filter((x) => x !== plan) : [...p.applicable_plans, plan] }))}
+                          className={`px-3 py-1.5 rounded-full text-xs font-bold border-2 transition-all capitalize ${
+                            editForm.applicable_plans.includes(plan) ? "border-indigo-500 bg-indigo-50 text-indigo-700" : "border-gray-200 text-gray-500"
+                          }`}>
+                          {plan}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  {editError && <p className="text-xs text-red-600 mb-2">⚠️ {editError}</p>}
+                  <div className="flex gap-2">
+                    <button onClick={() => saveEdit(c.id)} disabled={editSaving}
+                      className="bg-gray-900 hover:bg-gray-800 disabled:opacity-50 text-white font-bold text-xs px-4 py-2 rounded-full transition-all">
+                      {editSaving ? "Saving…" : "Save changes"}
+                    </button>
+                    <button onClick={() => setEditingId(null)}
+                      className="border border-gray-200 text-gray-500 font-bold text-xs px-4 py-2 rounded-full hover:bg-gray-50 transition-all">
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
             ))}
           </div>
         )}
