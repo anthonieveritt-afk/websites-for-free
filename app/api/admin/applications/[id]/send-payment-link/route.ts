@@ -19,6 +19,8 @@ export async function POST(
   const { id } = await params;
   const { plan, email, hasBasicShop } = await req.json();
 
+  const supabase = createServiceClient();
+
   const planConfig = PLANS[plan as keyof typeof PLANS];
   if (!planConfig) return NextResponse.json({ error: "Invalid plan" }, { status: 400 });
 
@@ -29,6 +31,41 @@ export async function POST(
   const stripe = getStripe();
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? `https://${BRAND.domain}`;
 
+  // Resolve coupon from the application record
+  const { data: appData } = await supabase
+    .from("applications")
+    .select("coupon_code")
+    .eq("id", id)
+    .single();
+
+  let stripeCouponId: string | null = null;
+  if (appData?.coupon_code) {
+    const { data: coupon } = await supabase
+      .from("coupons")
+      .select("*")
+      .eq("code", appData.coupon_code.trim().toUpperCase())
+      .eq("enabled", true)
+      .single();
+
+    if (coupon) {
+      // Reuse existing Stripe coupon or create a new one
+      if (coupon.stripe_coupon_id) {
+        stripeCouponId = coupon.stripe_coupon_id;
+      } else {
+        const stripeCoupon = await stripe.coupons.create(
+          coupon.discount_type === "percentage"
+            ? { percent_off: coupon.discount_value, duration: "once", name: coupon.code }
+            : { amount_off: coupon.discount_value, currency: "gbp", duration: "once", name: coupon.code }
+        );
+        stripeCouponId = stripeCoupon.id;
+        // Save back to DB for reuse
+        await supabase.from("coupons").update({ stripe_coupon_id: stripeCoupon.id }).eq("id", coupon.id);
+      }
+      // Increment uses count
+      await supabase.from("coupons").update({ uses_count: (coupon.uses_count ?? 0) + 1 }).eq("id", coupon.id);
+    }
+  }
+
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
     { price: planConfig.stripePriceId, quantity: 1 },
   ];
@@ -37,7 +74,7 @@ export async function POST(
     lineItems.push({ price: process.env.STRIPE_BASIC_SHOP_ADDON_PRICE_ID, quantity: 1 });
   }
 
-  const session = await stripe.checkout.sessions.create({
+  const sessionParams: Stripe.Checkout.SessionCreateParams = {
     mode: "subscription",
     payment_method_types: ["card"],
     line_items: lineItems,
@@ -49,10 +86,15 @@ export async function POST(
       trial_period_days: BRAND.trialDays,
       metadata: { applicationId: id, plan },
     },
-  });
+  };
+
+  if (stripeCouponId) {
+    sessionParams.discounts = [{ coupon: stripeCouponId }];
+  }
+
+  const session = await stripe.checkout.sessions.create(sessionParams);
 
   // Email the payment link to the client
-  const supabase = createServiceClient();
   const { data: app } = await supabase
     .from("applications")
     .select("business_name, contact_name")

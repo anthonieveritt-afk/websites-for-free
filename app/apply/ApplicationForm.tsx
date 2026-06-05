@@ -78,6 +78,7 @@ interface FormData {
   budget: string;
   timeline: string;
   howFound: string;
+  couponCode: string;
 }
 
 const initialData: FormData = {
@@ -100,6 +101,7 @@ const initialData: FormData = {
   budget: "",
   timeline: "",
   howFound: "",
+  couponCode: "",
 };
 
 export default function ApplicationForm() {
@@ -108,6 +110,8 @@ export default function ApplicationForm() {
   const [submitting, setSubmitting] = useState(false);
   const [uploading, setUploading] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [couponState, setCouponState] = useState<{ valid: boolean; message: string; discountedPrice?: number; saving?: number } | null>(null);
+  const [checkingCoupon, setCheckingCoupon] = useState(false);
   const router = useRouter();
 
   function update(key: keyof FormData, value: string) {
@@ -647,6 +651,55 @@ export default function ApplicationForm() {
                 <option key={opt} value={opt}>{opt}</option>
               ))}
             </select>
+          </div>
+
+          {/* Coupon code */}
+          <div>
+            <label className={labelClass}>Discount code (optional)</label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                className={inputClass}
+                placeholder="e.g. FIRSTMONTH"
+                value={form.couponCode}
+                onChange={(e) => { update("couponCode", e.target.value.toUpperCase()); setCouponState(null); }}
+              />
+              <button
+                type="button"
+                onClick={async () => {
+                  if (!form.couponCode) return;
+                  setCheckingCoupon(true);
+                  const planMap: Record<string, string> = { "£29/month": "starter", "£49/month": "growth", "£79/month": "pro" };
+                  const plan = planMap[form.budget] ?? null;
+                  const res = await fetch("/api/coupons/validate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ code: form.couponCode, plan }),
+                  });
+                  const json = await res.json();
+                  setCheckingCoupon(false);
+                  if (json.valid) {
+                    setCouponState({ valid: true, message: json.coupon.description ?? "Discount applied!", discountedPrice: json.discountedPrice, saving: json.savingAmount });
+                  } else {
+                    setCouponState({ valid: false, message: json.error ?? "Invalid code" });
+                  }
+                }}
+                disabled={checkingCoupon || !form.couponCode}
+                className="px-4 py-3 bg-gray-900 hover:bg-gray-800 disabled:opacity-50 text-white font-bold text-sm rounded-xl transition-all whitespace-nowrap cursor-pointer"
+              >
+                {checkingCoupon ? "..." : "Apply"}
+              </button>
+            </div>
+            {couponState && (
+              <div className={`mt-2 px-3 py-2 rounded-xl text-sm font-medium ${
+                couponState.valid ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-red-50 text-red-600 border border-red-200"
+              }`}>
+                {couponState.valid ? "✅" : "⚠️"} {couponState.message}
+                {couponState.valid && couponState.discountedPrice !== undefined && (
+                  <span className="ml-2">— saves £{couponState.saving?.toFixed(2)}/mo</span>
+                )}
+              </div>
+            )}
           </div>
 
           <div className="flex gap-3">
